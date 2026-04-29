@@ -1,0 +1,9 @@
+Sub inout()
+
+Dim i As Long
+For i = 33 To 37
+    Cells(i, 1).Value = i
+    Cells(i, 2).Value = i + 1
+Next i
+
+End Sub
