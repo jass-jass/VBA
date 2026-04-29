@@ -1,0 +1,18 @@
+Sub SendEmails()
+
+    Dim OutlookApp As Object
+    Dim OutlookMail As Object
+    
+    Set OutlookApp = CreateObject("Outlook.Application")
+    Set OutlookMail = OutlookApp.CreateItem(0)
+            
+    With OutlookMail
+        .To = "haha.email.com"
+        .cc = "hehe.email.com"
+        .Subject = "Reminder"
+        .Body = "Dear Haha," & vbNewLine & vbNewLine & "Please send me the details" & vbNewLine & vbNewLine & "Regards," & vbNewLine & "Jasmin"
+        .Display
+    End With
+            
+
+End Sub
