@@ -1,0 +1,54 @@
+Sub SendEmails()
+
+    Set wsEmails = ThisWorkbook.Sheets("Sheet1") ' email sheet
+    Set wsData = ThisWorkbook.Sheets("SS26") ' datasheet
+    
+    Dim OutlookApp As Object
+    Dim OutlookMail As Object
+    Set OutlookApp = CreateObject("Outlook.Application")
+    Dim i As Long
+    Dim lastRow As Long
+    
+    
+    lastRow = wsData.Cells(Rows.Count, 1).End(xlUp).Row
+    
+    For i = 2 To lastRow
+        
+        Dim supplier As String
+        Dim email As String
+        Dim shipDate As Date
+        Dim status As String
+        
+        supplier = wsData.Cells(i, 2).Value
+        shipDate = wsData.Cells(i, 8).Value
+        status = wsData.Cells(i, 9).Value
+
+        
+        If status = "handed over" Then
+            ' do nothing
+            
+        
+        ElseIf DateDiff("d", Date, shipDate) <= 15 Then
+            email = Application.WorksheetFunction.VLookup(supplier, _
+                    wsEmails.Range("A:C"), 3, False)
+            attn = Application.WorksheetFunction.VLookup(supplier, _
+                    wsEmails.Range("A:C"), 2, False)
+            MsgBox email
+            Set OutlookMail = OutlookApp.CreateItem(0)
+            
+            With OutlookMail
+                .To = email
+                .cc = "1@email.com;" & "2@email.com;" & "3@email.com;"
+                .Subject = "AW26 - Shipment Sample and Shipment update"
+                .Body = "Dear " & attn & "," & vbNewLine & vbNewLine & _
+                        "This is a reminder that your shipment is due on " & shipDate
+                .Display
+            End With
+            
+        End If
+        
+    Next i
+    
+    MsgBox "Emailed all suppliers"
+    
+End Sub
