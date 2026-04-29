@@ -1,0 +1,12 @@
+Sub add()
+
+Dim lastRow As String
+lastRow = Cells(Rows.Count, 1).End(xlUp)
+//Rows.Count gives no or rows
+//cell_position.End(xlUp) is like getting the value after Ctrl+Up arrow
+//cell_position.End(xlDown) is like getting the value after Ctrl+Down arrow
+//cell_position.End(xlToRight) is like getting the value after Ctrl+Right arrow
+//cell_position.End(xlToLeft) is like getting the value after Ctrl+Left arrow
+Cells(36, 2).Value = lastRow
+
+End Sub
