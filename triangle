@@ -1,0 +1,13 @@
+Sub inout()
+
+Dim i As Long
+Dim j As Long
+
+For i = 33 To 37
+    For j = 33 To i
+        Cells(i, i - j + 1).Value = i - 32
+    Next j
+Next i
+
+
+End Sub
